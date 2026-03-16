@@ -1,16 +1,16 @@
 # Invoice Processing Automation
 
-## What we built
+## What was developed in this project
 
 An **invoice processing pipeline** that ingests documents (JSON, CSV, XML, TXT, PDF), extracts structured data (with LLM for TXT/PDF), validates against inventory, applies approval rules, and runs a mock payment. **Business impact:** reduces manual data entry, catches out-of-stock and unknown items before payment, and provides a full audit trail with reasons for every decision.
 
 ## Background
 
-Acme Corp is a PE-backed manufacturing firm losing **$2M/year** on manual invoice processing. Invoices arrive via email as PDFs in messy formats with frequent errors. Staff manually extract data, validate against a legacy inventory database (inconsistent), obtain VP approval (via email chains), and process payment (via a banking API).
+Invoices arrive via email as PDFs in messy formats with frequent errors. Staff manually extract data, validate against a legacy inventory database (inconsistent), obtain VP approval (via email chains), and process payment (via a banking API).
 
 **Current pain points:**
-- 30% error rate
-- 5-day processing delays
+- High error rate
+- Long processing delays
 - Frustrated stakeholders
 
 ## Objective
@@ -19,7 +19,7 @@ Build a **multi-agent system** that automates the end-to-end invoice processing 
 
 ## Workflow
 
-The system should handle four stages:
+The system handles four stages:
 
 1. **Ingestion** — Extract structured data from invoice documents (PDFs, text files). Fields include: Vendor, Amount, Items (with quantities), and Due Date. Expect unstructured text, typos, missing data, and potentially fraudulent entries.
 
@@ -28,18 +28,6 @@ The system should handle four stages:
 3. **Approval** — Simulate VP-level review with rule-based decision-making (e.g., invoices over $10K require additional scrutiny). The agent should reason through approval/rejection with a reflection or critique loop.
 
 4. **Payment** — If approved, call a mock payment function. If rejected, log the rejection with reasoning.
-
-## Technical Requirements
-
-- **LLM Integration**: Use xAI's Grok as the core reasoning engine (via the xAI API at https://grok.x.ai). Other models are acceptable if you don't have an API key.
-- **Multi-Agent Orchestration**: Use a framework such as LangGraph, CrewAI, AutoGen, or a custom solution.
-- **Agent Capabilities**: Function calling / tool use, structured outputs, and self-correction loops.
-- **Runtime**: Assume no internet for external APIs — simulate everything locally.
-- **Tech Stack**: Python (preferred), with libraries like `langchain`, `crewai`, `autogen`, `pdfplumber`, `PyMuPDF`, etc. Run locally — no cloud deployment.
-
-## Provided Resources
-
-### Mock Invoice Data
 
 Sample invoices are provided in the `data/invoices/` directory in various formats (PDF, CSV, JSON, TXT). Use these as inputs for testing. The data intentionally includes a mix of clean entries and problematic ones — identifying and handling issues is part of the challenge.
 
