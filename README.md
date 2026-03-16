@@ -74,18 +74,6 @@ def mock_payment(vendor, amount):
     return {"status": "success"}
 ```
 
-### Grok API Setup
-
-```python
-from xai import Grok
-
-client = Grok(api_key="your_key")
-response = client.chat.completions.create(
-    model="grok-3",
-    messages=[{"role": "user", "content": "Reason about this..."}]
-)
-```
-
 ## Setup & Running the System
 
 ### 1. Python environment
